@@ -1,0 +1,45 @@
+---
+title: '55'
+output: html_document
+---
+
+## KOSPI Crawling
+
+```{r}
+library(rvest)
+library(httr)
+```
+
+
+ URL 주소를 가져와서 res 에 할당
+```{r URL GET}
+res<- GET(url='https://finance.naver.com/sise/sise_index.nhn?code=KOSPI')
+print(x=res1)
+```
+
+
+###크롤링 시작
+
+html_table() 이용해 통째로
+```{Crawling}
+Sys.getlocale()
+html= read_html(res=,encoding="euc-kr")
+node= html_nodes(html,css='table.table_kos_index')
+table= html_table(node,trim=TRUE)
+```
+
+
+```{r preprocessing}
+df<-as.data.frame(matrix(unlist(table), nrow =4, ncol=4, byrow = FALSE))
+colnames(df)=c()
+```
+
+
+깔끔하게 정
+```{r to make look prettier}
+library(knitr)
+df.c<-kable(df,caption="KOSPI Table in Naver")
+df.c
+
+table1
+```
