@@ -1,0 +1,35 @@
+---
+title: '55'
+output: html_document
+---
+
+## Daum Crawling
+
+library
+```{r}
+library(tidyverse)
+library(httr)
+library(rvest)
+```
+
+
+URL 주소를 가져와서 res 에 할당
+```{r URL GET}
+res = GET(url = 'https://www.daum.net/')
+```
+
+
+###크롤링 시작
+
+```{Crawling}
+searchWords <- res %>% 
+  read_html() %>% 
+  html_nodes(css = 'div.realtime_part > ol > li > div > div:nth-child(1) > span.txt_issue > a') %>% 
+  html_text(trim = TRUE)
+```
+
+
+print
+```{r to make look prettier}
+print(x = searchWords)
+```
